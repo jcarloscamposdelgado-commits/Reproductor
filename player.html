@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Reproductor</title>
+
+<style>
+body{
+margin:0;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+font-family:Arial;
+color:white;
+}
+
+#btn{
+padding:15px 25px;
+background:#d4af37;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<button id="btn">▶ Música</button>
+
+<audio id="audio"></audio>
+
+<script>
+const tracks = [
+ "LLOVIENDO EN EL SALÓN.mp3",
+ "Un extraño en el país de la libertad.mp3",
+ "VUELVO A SER YO_spotdown.org.mp3",
+ "Y Ahora_spotdown.org.mp3"
+];
+
+let index = 0;
+const audio = document.getElementById("audio");
+const btn = document.getElementById("btn");
+
+btn.onclick = () => {
+ if(audio.paused){
+   playTrack();
+   btn.textContent="⏸ Pausar";
+ }else{
+   audio.pause();
+   btn.textContent="▶ Música";
+ }
+};
+
+function playTrack(){
+ audio.src = tracks[index];
+ audio.play();
+}
+
+audio.onended = () => {
+ index = (index+1)%tracks.length;
+ playTrack();
+};
+</script>
+
+</body>
+</html>
